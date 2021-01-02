@@ -1,0 +1,19 @@
+﻿.styleForForm {
+    float: right;
+    direction: rtl;
+    margin-bottom: 5%;
+    text-align: center;
+    margin-right: 37%;
+}
+
+.frameForText {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 3%;
+    margin-top: 10%;
+}
+
+.formSelect {
+    margin-top: 418%;
+}

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<NewShoeStore.Models.OrderShoe>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form class="setForm">
+    <dl class="row align-items-center d-flex justify-content-start">
+        <dt>
+            <table class="tableStyle">
+                <tr>
+                    <th colspan="5">ההזמנה שלך</th>
+
+                </tr>
+                <tr>
+                    <td>סה"כ לתשלום</td>
+                    <td>זמינות</td>
+                    <td>כמות</td>
+                    <td>מידה</td>
+                    <td>פריטים</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </dt>
+        <dd>
+
+            <dl class="row setP">
+                <dt>
+                    <label for="interimAmount" class="frameForText">:סכום ביניים</label>
+                </dt>
+                <dd>
+                    <input type="text" class="autoInput">
+                </dd>
+            </dl>
+
+            <dl class="row setP">
+                <dt>
+                    <div class="setRadios">
+                        <div class="form-check">
+                            <input class="form-check-input setSInput" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                משלוח
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input setSInput" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                איסוף עצמי
+                            </label>
+                        </div>
+                    </div>
+
+                </dt>
+            </dl>
+
+            <dl class="row setP">
+                <dt>
+                    <label for="interimAmount" class="frameForText">:סך הכל לתשלום</label>
+                </dt>
+                <dd>
+                    <input type="text" class="autoInput">
+                </dd>
+            </dl>
+
+    </dl>
+
+
+    <button type="submit" class="btn btn-secondary">מעבר לתשלום</button>
+    <button type="submit" class="btn btn-secondary">חזרה לקניות</button>
+</form>
+
+
+
+@*<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shoe)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.CardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shoe.Color)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
+
+@section Css{
+    <link rel="stylesheet" href="~/css/OrderShoes.css" />
+}

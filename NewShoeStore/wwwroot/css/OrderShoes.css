@@ -1,0 +1,52 @@
+﻿th, td {
+    padding: 15px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.tableStyle {
+    border: 2px solid black;
+    margin-left: 30%;
+    margin-top: 5%;
+    /*direction: rtl;*/
+}
+
+td {
+    height: 8vh;
+    width: 10vw;
+}
+
+.frameForText {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+.setForm {
+    margin-left: 21%;
+}
+
+.setP {
+    margin-right: 18%;
+    float: right;
+    direction: rtl;
+    margin-top: 6%;
+    margin-bottom: -9%;
+}
+
+.setRadios {
+    text-align: center;
+    margin-right: -585%;
+    margin-top: 51%;
+    margin-bottom: 33%;
+}
+
+.setSInput {
+    margin-right: -15%;
+}
+
+.autoInput {
+    margin: 3%;
+    margin-bottom: 24%;
+}

@@ -1,0 +1,61 @@
+﻿.btn {
+    margin: right;
+    bottom: right;
+    max-width: 55%;
+}
+
+p {
+    text-align: right;
+}
+
+h1 {
+    text-align: right;
+}
+
+img {
+    height: 70vh;
+    width: 37vw;
+    border-style: outset;
+}
+
+.le {
+    margin-top: 50px;
+    margin: 150px;
+}
+
+.f {
+    text-align: right;
+    size: 500px;
+}
+
+.m {
+    margin: 20px 75px 20px 25px;
+    margin: right;
+    bottom: right;
+}
+
+.dl {
+    margin-inline-start: 25px;
+}
+
+.frameForText {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+    margin: 10%;
+    margin-left: 61%;
+    margin-right: -52%;
+    float: revert;
+}
+
+.setText {
+    margin-left: 16%;
+    margin-top: 2%;
+}
+
+.stayR {
+    float: right;
+}
+.font-weight-normal{
+display: inline-block;
+}

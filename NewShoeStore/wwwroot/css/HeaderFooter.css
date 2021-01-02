@@ -1,0 +1,9 @@
+﻿.abc {
+    direction: rtl;
+    /* position: relative;
+    z-index: 4;*/
+}
+
+.mr-auto {
+    margin-right: 0% !important;
+}

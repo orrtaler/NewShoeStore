@@ -1,0 +1,138 @@
+﻿@model NewShoeStore.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content ">
+    <!-- Nav pills -->
+    <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#login">משתמש רשום</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#regis">משתמש חדש</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <!-- כדי שהטאבים יהיו מעל המידע חייבים להוסיף
+    class="under" -->
+    <div class="tab-content under">
+        <div id="login" class="container tab-pane active">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">:מייל</label>
+                    <input type="email" class="form-control is-valid" id="exampleFormControlInput1" placeholder="name@example.com">
+                    <small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">:סיסמא</label>
+                    <input type="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="סיסמא">
+                    <small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>
+                </div>
+                <button type="submit" class="btn btn-primary">אישור</button>
+            </form>
+        </div>
+        <div id="regis" class="container tab-pane fade">
+            <form>
+                <div class="form-group">
+                    <label for="InputName">:שם מלא</label>
+                    <input type="text" class="form-control is-valid" id="InputName" placeholder="שם מלא">
+                </div>
+                <div class="form-group">
+                    <label for="InputCountry">:ארץ</label>
+                    <input type="text" class="form-control is-valid" id="InputCountry" placeholder="ארץ">
+                </div>
+                <div class="form-group">
+                    <label for="InputCity">:עיר</label>
+                    <input type="text" class="form-control is-valid" id="InputCity" placeholder="עיר">
+                </div>
+                <div class="form-group">
+                    <label for="InputStreet">:רחוב</label>
+                    <input type="text" class="form-control is-valid" id="InputStreet" placeholder="רחוב">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput2">:מייל</label>
+                    <input type="email" class="form-control is-valid" id="exampleFormControlInput2" placeholder="name@example.com">
+                    <small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">:סיסמא</label>
+                    <input type="password" class="form-control is-invalid" id="exampleInputPassword2" placeholder="סיסמא">
+                    <small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPasswordVer">:אמת סיסמא</label>
+                    <input type="password" class="form-control is-invalid" id="exampleInputPasswordVer" placeholder="סיסמא">
+                </div>
+                <button type="submit" class="btn btn-primary">אישור</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@*<h1>Create</h1>
+
+    <h4>Customer</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HouseNumber" class="control-label"></label>
+                    <input asp-for="HouseNumber" class="form-control" />
+                    <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mail" class="control-label"></label>
+                    <input asp-for="Mail" class="form-control" />
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
+
+@section Css{
+    <link rel="stylesheet" href="~/css/Customer.css" />
+}
+
