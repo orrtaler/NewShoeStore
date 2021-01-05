@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,16 @@ namespace NewShoeStore.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(shoe);
+        }
+
+        public IActionResult ToGo(int id, [Bind("Id,Name,Color,Price,ProductDescription,Img,Category,Views,Size")] Shoe shoe)
+        {
+            if(HttpContext.Session.GetString("user")==null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
+            //TempData["ShoeId"] = id;
+            return RedirectToAction("SetForOrder", "OrderShoes", shoe);
         }
 
         // GET: Shoes/Edit/5

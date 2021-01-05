@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,21 @@ namespace NewShoeStore.Controllers
         // GET: OrderShoes
         public async Task<IActionResult> Index()
         {
-            var newShoeStoreContext = _context.OrderShoe.Include(o => o.Order).Include(o => o.Shoe);
+            var UserName = HttpContext.Session.GetString("user").ToString();
+            var newShoeStoreContext = _context.OrderShoe.Where(o =>o.IdOrder.ToString()== UserName).Include(o => o.Shoe);
             return View(await newShoeStoreContext.ToListAsync());
         }
+
+        public IActionResult SetForOrder(Shoe shoe)
+        {
+            //Shoe MyShoeId = TempData["ShoeId"] as Shoe;
+            ViewData["IdOrder"] = HttpContext.Session.GetString("user");
+            ViewData["IdShose"] = shoe.Id;
+            var c = "/";
+            return RedirectToAction("Details" + c.ToString() + shoe.Id.ToString(), "Shoes");
+        }
+
+
 
         // GET: OrderShoes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -49,8 +62,8 @@ namespace NewShoeStore.Controllers
         // GET: OrderShoes/Create
         public IActionResult Create()
         {
-            ViewData["IdOrder"] = new SelectList(_context.Order, "Id", "CardName");
-            ViewData["IdShose"] = new SelectList(_context.Shoe, "Id", "Color");
+            ViewData["IdOrder"] = new SelectList(_context.Order, "Id", "Idcustomer");
+            ViewData["IdShose"] = new SelectList(_context.Shoe, "Id", "Name");
             return View();
         }
 
@@ -67,8 +80,8 @@ namespace NewShoeStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdOrder"] = new SelectList(_context.Order, "Id", "CardName", orderShoe.IdOrder);
-            ViewData["IdShose"] = new SelectList(_context.Shoe, "Id", "Color", orderShoe.IdShose);
+            ViewData["IdOrder"] = new SelectList(_context.Order, "Id", "Idcustomer", orderShoe.IdOrder);
+            ViewData["IdShose"] = new SelectList(_context.Shoe, "Id", "Name", orderShoe.IdShose);
             return View(orderShoe);
         }
 

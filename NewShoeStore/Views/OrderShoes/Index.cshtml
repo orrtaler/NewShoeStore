@@ -14,25 +14,24 @@
                 </tr>
                 <tr>
                     <td>סה"כ לתשלום</td>
-                    <td>זמינות</td>
+                    <td>צבע</td>
                     <td>כמות</td>
                     <td>מידה</td>
                     <td>פריטים</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                            <tr>
+                                <td>@item.Shoe.Price</td>
+                                <td>@item.Shoe.Color </td>
+                                <td>1</td>
+                                <td>@item.Shoe.Size </td>
+                                <td>@item.Shoe.Name </td>
+                            </tr>
+                        }
+                }
             </table>
         </dt>
         <dd>
@@ -48,22 +47,10 @@
 
             <dl class="row setP">
                 <dt>
-                    <div class="setRadios">
-                        <div class="form-check">
-                            <input class="form-check-input setSInput" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                משלוח
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input setSInput" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
-                                איסוף עצמי
-                            </label>
-                        </div>
+                    <div>
+                        <p>עלות משלוח- 30 שקלים</p>
+                        <p>בקניה מעל 300 שקלים משלוח חינם</p>
                     </div>
-
                 </dt>
             </dl>
 
@@ -72,6 +59,18 @@
                     <label for="interimAmount" class="frameForText">:סך הכל לתשלום</label>
                 </dt>
                 <dd>
+                    @*@{ float SetPrice = 0; }
+                    @{var it = Model; }*@
+
+                        @*@SetPrice= SetPrice + item.Shoe.Price;*@
+                       @*@for (int i = 0; i <1; i++)
+                        {
+                            @SetPrice= SetPrice + it.get;
+                        }*@
+
+                    <p> the price</p>
+
+
                     <input type="text" class="autoInput">
                 </dd>
             </dl>

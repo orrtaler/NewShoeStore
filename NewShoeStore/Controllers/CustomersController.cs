@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,13 @@ namespace NewShoeStore.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+            //IF רשמתי
+            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
+            //אחרת הוא יעביר אותו לעמוד רישום
+            if(HttpContext.Session.GetString("user")==null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
             return View(await _context.Customer.ToListAsync());
         }
 
@@ -62,8 +70,43 @@ namespace NewShoeStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                ViewData["MissingInformation"] = "חסרים פרטים חשובים ברישום";
+            }
             return View(customer);
         }
+
+
+        // GET: Customers/LogIn
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        // POST: Customers/LogIn
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn([Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password")] Customer customer)
+        {
+            var q = from a in _context.Customer
+                    where customer.Mail == a.Mail &&
+                          customer.Password == a.Password
+                    select a;
+
+            if (q.Count() > 0)
+            {
+                HttpContext.Session.SetString("user", q.First().Id.ToString());
+                return RedirectToAction("Index", "OrderShoes");
+            }
+            else
+            {
+                ViewData["Error"] = "User does not exist!";
+            }
+            return RedirectToAction(nameof(Create),customer);
+            //return View(customer);
+        }
+
 
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)

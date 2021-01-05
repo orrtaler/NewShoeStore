@@ -29,6 +29,11 @@ namespace NewShoeStore
 
             services.AddDbContext<NewShoeStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("NewShoeStoreContext")));
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            }
+              );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +53,8 @@ namespace NewShoeStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
