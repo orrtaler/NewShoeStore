@@ -28,15 +28,17 @@ namespace NewShoeStore.Models
         [Required]
         [Display(Name = "תמונה")]
         public string Img { get; set; }
-        [Display(Name = "קטגוריה")]
-        public Category Category { get; set; }
+        
         [Display(Name = "רשימת הזמנות למוצר")]
         public ICollection<OrderShoe> Orders { get; set; }
-       
         [Display(Name = "כמות צפיות במוצר")]
         public int Views { get; set; }
+        [Required]
         [Range(3,46)]
         [Display(Name = "מידה")]
         public int Size { get; set; }
+        [Required]
+        [Display(Name = "קטגוריה")]
+        public string Category { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace NewShoeStore.Data
             : base(options)
         {
         }
+        //public DbSet<Order> Order { get; set; }
+        //public DbSet<Customer> Customer { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,10 +29,16 @@ namespace NewShoeStore.Data
                 .HasOne(pt => pt.Order)
                 .WithMany(t => t.Shoes)
                 .HasForeignKey(pt => pt.IdOrder);
+
+            modelBuilder.Entity<Customer>()
+           .HasOne(b => b.Order)
+           .WithOne(i => i.Customer)
+           .HasForeignKey<Order>(b => b.CustomerId);
+
         }
 
 
-        public DbSet<NewShoeStore.Models.Category> Category { get; set; }
+        //public DbSet<NewShoeStore.Models.Category> Category { get; set; }
 
         public DbSet<NewShoeStore.Models.Customer> Customer { get; set; }
 

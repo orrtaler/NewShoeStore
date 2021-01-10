@@ -28,14 +28,33 @@ namespace NewShoeStore.Controllers
             return View(await newShoeStoreContext.ToListAsync());
         }
 
-        public IActionResult SetForOrder(Shoe shoe)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetForOrder([Bind("HttpContext.Session.GetString('user')","shoe.IdShose")] OrderShoe orderShoe,Shoe shoe)
         {
-            //Shoe MyShoeId = TempData["ShoeId"] as Shoe;
-            ViewData["IdOrder"] = HttpContext.Session.GetString("user");
-            ViewData["IdShose"] = shoe.Id;
-            var c = "/";
-            return RedirectToAction("Details" + c.ToString() + shoe.Id.ToString(), "Shoes");
+            //OrderShoe orderShoe = new OrderShoe(HttpContext.Session.GetString("user"),shoe.Id);
+            //OrderShoe orderShoe = new OrderShoe();
+            orderShoe.IdOrder.Equals(HttpContext.Session.GetString("user"));
+            orderShoe.IdShose.Equals(shoe.Id);
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(orderShoe);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            Shoe MyShoeId = TempData["ShoeId"] as Shoe;
+            //ViewData["IdOrder"] = HttpContext.Session.GetString("user");
+            //ViewData["IdShose"] = shoe.Id;
+            ViewData["IdOrder"] = new SelectList(_context.Order, "Id", "Idcustomer", orderShoe.IdOrder);
+            ViewData["IdShose"] = new SelectList(_context.Shoe, "Id", "Name", orderShoe.IdShose);
+            //return RedirectToAction("Details/" + shoe.Id.ToString(), "Shoes");
+
+            return RedirectToAction("Details", "Store", new { shoeId = shoe.Id });
+
         }
+
+
 
 
 

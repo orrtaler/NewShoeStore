@@ -39,6 +39,7 @@ namespace NewShoeStore.Models
         [StringLength(8)]
         [Display(Name = "סיסמא")]
         public string Password { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public Order Order { get; set; }
+
     }
 }

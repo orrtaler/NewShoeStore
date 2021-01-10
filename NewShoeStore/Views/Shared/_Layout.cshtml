@@ -14,11 +14,11 @@
 
         <!--מכאן הקוד לחלק העליון-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="חיפוש מוצר" aria-label="Search">
+            <form asp-area="" asp-controller="Shoes" asp-action="SearchAsync" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="SearchAsync" placeholder="חיפוש מוצר" aria-label="SearchAsync" name="SearchAsync">
                 <!--<button class="btn btn-outline-primary my-2 my-sm-0" data-icon="search">חיפוש</button>-->
                 <!--קישור עם איכון של חיפוש-->
-                <a href="#">
+                <a asp-area="" asp-controller="Shoes" asp-action="SearchAsync">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search colorForSearch" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -28,7 +28,9 @@
                     </svg>
                 </a>
                 <!--קישור עם איכון של סל קניות-->
-                <a href="#">
+
+                <a asp-area="" asp-controller="Orders" asp-action="Index">
+
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3 colorForShoppingCart" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -54,7 +56,7 @@
                             <a class="dropdown-item" href="#">סנדלים</a>
                             <!--<div class="dropdown-divider"></div>-->
                             <a class="dropdown-item" href="#">סניקרס</a>
-                            <a class="dropdown-item" href="#">נעליים שטוחות</a>
+                            <a class="dropdown-item" href="#">נעלי בובה </a>
                             <a class="dropdown-item" href="#">עקבים</a>
                             <a class="dropdown-item" href="#">נעלי בית</a>
                         </div>
@@ -65,7 +67,7 @@
                             גברים
                         </a>
                         <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">נעליים רשמיות</a>
+                            <a class="dropdown-item" href="#">אלגנט</a>
                             <a class="dropdown-item" href="#">מגפיים</a>
                             <a class="dropdown-item" href="#">סנדלים</a>
                             <a class="dropdown-item" href="#">נעלי בית</a>
@@ -78,11 +80,11 @@
                             בנים
                         </a>
                         <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">מגפיים ומגפי גומי</a>
+                            <a class="dropdown-item" href="#">מגפיים</a>
                             <a class="dropdown-item" href="#">סנדלים</a>
                             <a class="dropdown-item" href="#">נעלי בית</a>
                             <a class="dropdown-item" href="#">סניקרס</a>
-                            <a class="dropdown-item" href="#">אלגנטיות</a>
+                            <a class="dropdown-item" href="#">אלגנט</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown inTheSameLine">
@@ -91,11 +93,11 @@
                             בנות
                         </a>
                         <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">מגפיים ומגפי גומי</a>
+                            <a class="dropdown-item" href="#">מגפיים</a>
                             <a class="dropdown-item" href="#">סנדלים</a>
                             <a class="dropdown-item" href="#">נעלי בית</a>
                             <a class="dropdown-item" href="#">סניקרס</a>
-                            <a class="dropdown-item" href="#">נעליים שטוחות</a>
+                            <a class="dropdown-item" href="#">נעלי בובה</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown inTheSameLine">
@@ -141,11 +143,11 @@
                 <div class="collapse navbar-collapse navbar-nav mr-auto abc" id="navbarSupportedContent">
                     <!--<ul class="navbar-nav mr-auto">-->
                     <div class="col-sm-3 stayRight">
-                        <a class="nav-link " href="#">תנאי שימוש</a>
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="TermsofUse">תנאי שימוש</a>
                         <!-- צריך להוסיף את הקישור המתאים שמפנה-->
                     </div>
                     <div class="col-sm-3 stayRight">
-                        <a class="nav-link " href="#">הודעת פרטיות</a>
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">הודעת פרטיות</a>
                         <!-- צריך להוסיף את הקישור המתאים שמפנה-->
                     </div>
                     <div class="col-sm-6">

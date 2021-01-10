@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,13 @@ namespace NewShoeStore.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            //IF רשמתי
+            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
+            //אחרת הוא יעביר אותו לעמוד רישום
+            if (HttpContext.Session.GetString("user") == null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
             return View(await _context.Order.ToListAsync());
         }
 
@@ -54,7 +62,7 @@ namespace NewShoeStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Idcustomer,CardName,ExpiryDate,SecurityCode")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,CustomerId,CardIdNumber,CardName,ExpiryDate,SecurityCode")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +94,7 @@ namespace NewShoeStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Idcustomer,CardName,ExpiryDate,SecurityCode")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerId,CardIdNumber,CardName,ExpiryDate,SecurityCode")] Order order)
         {
             if (id != order.Id)
             {

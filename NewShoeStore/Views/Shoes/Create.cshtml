@@ -39,8 +39,39 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+                @*<input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>*@
+            <select asp-for="Category" class="form-control col m">
+                <option>נשים מגפיים</option>
+                <option>נשים סנדלים</option>
+                <option>נשים סניקרס</option>
+                <option>נשים נעלי בובה</option>
+                <option>נשים עקבים</option>
+                <option>נשים נעלי בית</option>
+                <option>גברים אלגנט</option>
+                <option>גברים מגפיים</option>
+                <option>גברים סנדלים</option>
+                <option>גברים נעלי בית</option>
+                <option>גברים סניקרס</option>
+                <option>בנים מגפיים</option>
+                <option>בנים סנדלים</option>
+                <option>בנים נעלי בית</option>
+                <option>בנים סניקרס</option>
+                <option>בנים אלגנט</option>
+                <option>בנות מגפיים</option>
+                <option>בנות סנדלים</option>
+                <option>בנות נעלי בית</option>
+                <option>בנות סניקרס</option>
+                <option>בנות נעלי בובה</option>
+                <option>בייבי בנים נעלי צעד ראשון</option>
+                <option>בייבי בנים חגיגי</option>
+                <option>בייבי בנים ספורט</option>
+                <option>בייבי בנים נעלי בית</option>
+                <option>בייבי בנות נעלי צעד ראשון</option>
+                <option>בייבי בנות חגיגי</option>
+                <option>בייבי בנות ספורט</option>
+                <option>בייבי בנות נעלי בית</option>
+            </select>
             </div>
             <div class="form-group">
                 <label asp-for="Views" class="control-label"></label>

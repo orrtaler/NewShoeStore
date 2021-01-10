@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewShoeStore.Data;
 
 namespace NewShoeStore.Migrations
 {
     [DbContext(typeof(NewShoeStoreContext))]
-    partial class NewShoeStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210109173136_SetCusOrd")]
+    partial class SetCusOrd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

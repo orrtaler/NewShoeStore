@@ -28,6 +28,11 @@ namespace NewShoeStore.Controllers
             return View();
         }
 
+        public IActionResult TermsofUse()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

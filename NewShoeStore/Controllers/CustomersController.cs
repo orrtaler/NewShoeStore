@@ -26,10 +26,10 @@ namespace NewShoeStore.Controllers
             //IF רשמתי
             //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
             //אחרת הוא יעביר אותו לעמוד רישום
-            if(HttpContext.Session.GetString("user")==null)
-            {
-                return RedirectToAction("Create", "Customers");
-            }
+            //if(HttpContext.Session.GetString("user")==null)
+            //{
+            //    return RedirectToAction("Create", "Customers");
+            //}
             return View(await _context.Customer.ToListAsync());
         }
 
@@ -62,7 +62,7 @@ namespace NewShoeStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password,Order")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace NewShoeStore.Controllers
         // POST: Customers/LogIn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogIn([Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password")] Customer customer)
+        public async Task<IActionResult> LogIn([Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password,Order")] Customer customer)
         {
             var q = from a in _context.Customer
                     where customer.Mail == a.Mail &&
@@ -129,7 +129,7 @@ namespace NewShoeStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,City,Country,Street,HouseNumber,Mail,Password,Order")] Customer customer)
         {
             if (id != customer.Id)
             {

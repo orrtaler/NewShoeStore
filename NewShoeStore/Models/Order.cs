@@ -10,13 +10,14 @@ namespace NewShoeStore.Models
     {
         [Key]
         public int Id { get; set; }
+        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public ICollection<OrderShoe> Shoes { get; set; }
 
         [Display(Name = "תעודת זהות")]
         //[RegularExpression(@"^[0 - 9]{8}$")]
         [Required(ErrorMessage = "יש להכניס מספר תעודת זהות בן 9 ספרות ")]
-        public int Idcustomer { get; set; }
+        public int CardIdNumber { get; set; }
 
         [Required(ErrorMessage = "יש להכניס מספר כרטיס")]
         [StringLength(50)]

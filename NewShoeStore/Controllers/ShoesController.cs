@@ -23,6 +23,21 @@ namespace NewShoeStore.Controllers
         // GET: Shoes
         public async Task<IActionResult> Index()
         {
+            //if (HttpContext.Session.GetString("cart") == null)
+            //{
+            //    return View(await _context.Shoe.ToListAsync());
+            //}
+            //else
+            //{
+            //    string productId = HttpContext.Session.GetString("cart");
+            //    string[] ids = productId.Split(',');
+            //    int[] myInts = ids.Select(int.Parse).ToArray();
+            //    var purchased = from p in _context.Shoe
+            //                    where myInts.Any(s => s == p.Id)
+            //                    select p;
+            //    var leftItems = _context.Shoe.Except(purchased);
+            //    return View(await leftItems.ToListAsync());
+            //}
             return View(await _context.Shoe.ToListAsync());
         }
 
@@ -55,7 +70,7 @@ namespace NewShoeStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Color,Price,ProductDescription,Img,Category,Views,Size")] Shoe shoe)
+        public async Task<IActionResult> Create([Bind("Id,Name,Color,Price,ProductDescription,Img,Views,Size,Category")] Shoe shoe)
         {
             if (ModelState.IsValid)
             {
@@ -66,13 +81,34 @@ namespace NewShoeStore.Controllers
             return View(shoe);
         }
 
-        public IActionResult ToGo(int id, [Bind("Id,Name,Color,Price,ProductDescription,Img,Category,Views,Size")] Shoe shoe)
+        [HttpPost]
+        public async Task<IActionResult> Search(string name)
+        {
+            var s = from Shoe in _context.Shoe
+                    where Shoe.Category.Contains(name.ToLower())
+                    orderby Shoe.Category
+                    select Shoe;
+            return RedirectToAction(nameof(Index), await s.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<IActionResult> SearchAsync(string name)
+        {
+            var s = from Shoe in _context.Shoe
+                    where Shoe.Name.Contains(name.ToLower())
+                    orderby Shoe.Name
+                    select Shoe;
+            //return RedirectToAction(nameof(Index), s.ToListAsync());
+            return RedirectToAction("Index", "Shoes");
+        }
+
+        public IActionResult ToGo(int id, [Bind("Id,Name,Color,Price,ProductDescription,Img,Views,Size,Category")] Shoe shoe)
         {
             if(HttpContext.Session.GetString("user")==null)
             {
                 return RedirectToAction("Create", "Customers");
             }
             //TempData["ShoeId"] = id;
+           
             return RedirectToAction("SetForOrder", "OrderShoes", shoe);
         }
 
