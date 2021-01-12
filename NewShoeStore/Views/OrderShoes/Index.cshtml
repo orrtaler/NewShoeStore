@@ -4,87 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<form class="setForm">
-    <dl class="row align-items-center d-flex justify-content-start">
-        <dt>
-            <table class="tableStyle">
-                <tr>
-                    <th colspan="5">ההזמנה שלך</th>
-
-                </tr>
-                <tr>
-                    <td>סה"כ לתשלום</td>
-                    <td>צבע</td>
-                    <td>כמות</td>
-                    <td>מידה</td>
-                    <td>פריטים</td>
-                </tr>
-                @if (Model != null)
-                {
-                    @foreach (var item in Model)
-                    {
-                            <tr>
-                                <td>@item.Shoe.Price</td>
-                                <td>@item.Shoe.Color </td>
-                                <td>1</td>
-                                <td>@item.Shoe.Size </td>
-                                <td>@item.Shoe.Name </td>
-                            </tr>
-                        }
-                }
-            </table>
-        </dt>
-        <dd>
-
-            <dl class="row setP">
-                <dt>
-                    <label for="interimAmount" class="frameForText">:סכום ביניים</label>
-                </dt>
-                <dd>
-                    <input type="text" class="autoInput">
-                </dd>
-            </dl>
-
-            <dl class="row setP">
-                <dt>
-                    <div>
-                        <p>עלות משלוח- 30 שקלים</p>
-                        <p>בקניה מעל 300 שקלים משלוח חינם</p>
-                    </div>
-                </dt>
-            </dl>
-
-            <dl class="row setP">
-                <dt>
-                    <label for="interimAmount" class="frameForText">:סך הכל לתשלום</label>
-                </dt>
-                <dd>
-                    @*@{ float SetPrice = 0; }
-                    @{var it = Model; }*@
-
-                        @*@SetPrice= SetPrice + item.Shoe.Price;*@
-                       @*@for (int i = 0; i <1; i++)
-                        {
-                            @SetPrice= SetPrice + it.get;
-                        }*@
-
-                    <p> the price</p>
-
-
-                    <input type="text" class="autoInput">
-                </dd>
-            </dl>
-
-    </dl>
-
-
-    <button type="submit" class="btn btn-secondary">מעבר לתשלום</button>
-    <button type="submit" class="btn btn-secondary">חזרה לקניות</button>
-</form>
-
-
-
-@*<h1>Index</h1>
+<h1>Index</h1>
 
     <p>
         <a asp-action="Create">Create New</a>
@@ -118,7 +38,7 @@
             </tr>
     }
         </tbody>
-    </table>*@
+    </table>
 
 @section Css{
     <link rel="stylesheet" href="~/css/OrderShoes.css" />

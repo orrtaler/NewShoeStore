@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<form class="styleForForm">
+<!--<form class="styleForForm">
     <div class="form-row">
         <div class="form-group col-md-12 m">
             <div class="col-md-6 col-xl-6">
@@ -32,7 +32,7 @@
 
     <div class="form-row">
         <div class="form-group col-md-1 mb-1">
-            <label class="frameForText" for="validationCustom04">תאריך תפוגה</label>
+            <label class="frameForText" for="validationCustom04">תאריך תפוגה</label>-->
             <!--<label class="frameForText" for="validationCustom04">תוקף חודש</label>
             <select class="custom-select" id="validationCustom04" required>
                 <option selected disabled value="">בחר</option>
@@ -49,7 +49,7 @@
                 <option>11</option>
                 <option>12</option>
             </select>-->
-            <select class="formSelect" name="ValidForMonth" id="ValidForMonth" required>
+            <!--<select class="formSelect" name="ValidForMonth" id="ValidForMonth" required>
                 <option value="none" selected disabled hidden>
                     תוקף חודש
                 </option>
@@ -66,11 +66,11 @@
                 <option value="11">11</option>
                 <option value="12">12</option>
             </select>
-        </div>
+        </div>-->
 
         <!--<span>/</span>-->
 
-        <div class="form-group col-md-1 mb-1">
+        <!--<div class="form-group col-md-1 mb-1">
             <select class="formSelect" name="ValidForYear" id="ValidForYear" required>
                 <option value="none" selected disabled hidden>
                     תוקף שנה
@@ -114,11 +114,11 @@
 
     <button type="submit" class="btn btn-secondary">לתשלום</button>
     <button type="submit" class="btn btn-secondary">ביטול</button>
-</form>
+</form>-->
 
 
 
-@*<h1>Create</h1>
+<h1>Create</h1>
 
     <h4>Order</h4>
     <hr />
@@ -126,10 +126,16 @@
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @*<div class="form-group">*@
+                    @*<label asp-for="CustomerId" class="control-label"></label>
+                    <div asp-for="CustomerId">@ViewBag.thisUser</div>*@
+                   @*<input asp-for="CustomerId" class="form-control" />*@
+                    @*<span asp-validation-for="CustomerId" class="text-danger"></span>*@
+                @*</div>*@
                 <div class="form-group">
-                    <label asp-for="Idcustomer" class="control-label"></label>
-                    <input asp-for="Idcustomer" class="form-control" />
-                    <span asp-validation-for="Idcustomer" class="text-danger"></span>
+                    <label asp-for="CardIdNumber" class="control-label"></label>
+                    <input asp-for="CardIdNumber" class="form-control" />
+                    <span asp-validation-for="CardIdNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="CardName" class="control-label"></label>
@@ -154,8 +160,8 @@
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
+        <a asp-controller="Home" asp-action="Index">Back to List</a>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

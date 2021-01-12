@@ -59,7 +59,8 @@
                         </dd>
                     </dl>
                 </div>
-                <a asp-action="ToGo" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </a>
+                <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </a>
+                <a asp-action="Cart" class="btn btn-secondary btn-lg btn-block stayR">תשלום </a>
                 <a asp-action="Index" class="btn btn-secondary btn-lg btn-block stayR">חזרה לרשימת המוצרים</a>
             </dd>
         </dl>
