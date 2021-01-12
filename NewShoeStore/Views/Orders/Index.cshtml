@@ -1,58 +1,100 @@
-﻿@model IEnumerable<NewShoeStore.Models.Order>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<NewShoeStore.Models.Order>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+@if (Context.Session.GetString("UserName.Id") == "1")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p> 
+ }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<table class="tableStyle">
+    <tr>
+        <th colspan="5">ההזמנה שלך</th>
+
+    </tr>
+    <tr>
+        <td>סה"כ לתשלום</td>
+        <td>זמינות</td>
+        <td>כמות</td>
+        <td>מידה</td>
+        <td>פריטים</td>
+  @*@if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                            <tr>
+                                <td>@item.Shoes</td>
+                                <td>@item.Shoe.Color </td>
+                                <td>1</td>
+                                <td>@item.Shoe.Size </td>
+                                <td>@item.Shoe.Name </td>
+                            </tr>
+                        }
+                }*@
+    <tr class="endOfTable" colspan="4">
+        <td>סכום ביניים</td>
+        <td></td>
+    </tr>
+    <tr class="endOfTable" colspan="4">
+        <td>משלוח</td>
+        <td></td>
+    </tr>
+    <tr class="endOfTable" colspan="4">
+        <td>סה"כ</td>
+        <td></td>
+    </tr>
+</table>
 
 
-  <table class="table">
-            <thead>
-                <tr>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Idcustomer)
-                    </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.CardName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ExpiryDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SecurityCode)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Idcustomer)
-                    </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExpiryDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SecurityCode)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-            </tbody>
-        </table>
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Idcustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpiryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecurityCode)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idcustomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpiryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecurityCode)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
 
 
     @section Css{

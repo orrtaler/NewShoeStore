@@ -103,24 +103,24 @@ namespace NewShoeStore.Controllers
             return View(shoe);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Search(string name)
         {
             var s = from Shoe in _context.Shoe
-                    where Shoe.Category.Contains(name.ToLower())
+                    where Shoe.Category.Contains(name)
                     orderby Shoe.Category
                     select Shoe;
-            return RedirectToAction(nameof(Index), await s.ToListAsync());
+            return View(await s.ToListAsync());
         }
         [HttpPost]
         public async Task<IActionResult> SearchAsync(string name)
         {
             var s = from Shoe in _context.Shoe
-                    where Shoe.Name.Contains(name.ToLower())
+                    where Shoe.Name.Contains(name)
                     orderby Shoe.Name
                     select Shoe;
             //return RedirectToAction(nameof(Index), s.ToListAsync());
-            return RedirectToAction("Index", "Shoes");
+            return RedirectToAction("Index", "Shoes", s.ToListAsync());
         }
 
         //מאפרת

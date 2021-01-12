@@ -33,6 +33,29 @@ namespace NewShoeStore.Controllers
             return View(await _context.Order.ToListAsync());
         }
 
+
+
+
+//                if (HttpContext.Session.GetString("user")== null) { 
+//                if (HttpContext.Session.GetString("user.Id") == "1")
+//            {
+//                // if(Context.Session.GetString("UserName.Id") == "1")
+//                return RedirectToAction("Create", "Customers");
+//    }
+//            else
+//                return RedirectToAction(nameof(Index));
+//}
+//            else
+//    return View(await _context.Order.ToListAsync());
+//        }
+
+
+
+
+
+
+
+
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {

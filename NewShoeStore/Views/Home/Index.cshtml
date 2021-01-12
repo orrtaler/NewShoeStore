@@ -1,20 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-}
-
+ }
 <body>
     <div class="row m">
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="נשים.html"> <img src="~/Img/נשים.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body">
-                    <h1 class="card-text h">נשים</h1>
-                </div>
-            </div>
+                        <a asp-controller="Shoes" asp-action="Search" asp-route-name="נשים" ><img src="~/Img/נשים.jpg" class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <h1 class="card-text h">נשים</h1>
+                        </div>
+                    </div>
         </div>
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="בנות.html"><img src="~/Img/בנות.jpg" class="card-img-top" alt="..."></a>
+                <a asp-controller="Shoes" asp-action="Search" asp-route-name="בנות"><img src="~/Img/בנות.jpg" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h1 class="card-text">בנות</h1>
                 </div>
@@ -22,7 +21,7 @@
         </div>
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="picturs/home/בייבי בנות.jpg"></a><img src="~/Img/בייבי בנות.jpg" class="card-img-top" alt="...">
+                <a asp-controller="Shoes" asp-action="Search" asp-route-name="בייבי בנות"><img src="~/Img/בייבי בנות.jpg" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h1 class="card-text">בייבי בנות</h1>
                 </div>
@@ -32,7 +31,7 @@
     <div class="row m">
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="גברים.html"> <img src="~/Img/גברים.jpg" class="card-img-top" alt="..."></a>
+                <a asp-controller="Shoes" asp-action="Search" asp-route-name="גברים"> <img src="~/Img/גברים.jpg" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h1 class="card-text">גברים</h1>
                 </div>
@@ -40,7 +39,7 @@
         </div>
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="בנים.html"><img src="~/Img/בנים.jpg" class="card-img-top" alt="..."></a>
+                <a asp-controller="Shoes" asp-action="Search" asp-route-name="בנים"><img src="~/Img/בנים.jpg" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h1 class="card-text">בנים</h1>
                 </div>
@@ -48,7 +47,7 @@
         </div>
         <div class="col-sm-3 m-4">
             <div class="card" style="width: 22rem;">
-                <a href="בייבי בנים.html"><img src="~/Img/בייבי בנים.jpg" class="card-img-top" alt="..."></a>
+                <a asp-controller="Shoes" asp-action="Search" asp-route-name="בייבי בנים"><img src="~/Img/בייבי בנים.jpg" class="card-img-top" alt="..."></a>
                 <div class="card-body">
                     <h1 class="card-text ">בייבי בנים</h1>
                 </div>

@@ -1,44 +1,49 @@
-﻿@model IEnumerable<NewShoeStore.Models.Customer>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<NewShoeStore.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>רשימת חברי מועדון</h1>
+@*כיוון שזה עמוד למנהל בלבד אין צורך בהסתרת כפתור זה*@ 
+@*@if (Context.Session.GetString("UserName.Id") == "1")*@
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
 
 <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Street)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HouseNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FullName)
@@ -67,6 +72,6 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
-    }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

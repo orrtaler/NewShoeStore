@@ -2,16 +2,16 @@
 @model IEnumerable<NewShoeStore.Models.Shoe>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Search";
 }
 
-@*<h1>מוצרים</h1>*@
+<h1>מוצרים</h1>
 @if (Context.Session.GetString("UserName.Id") == "1")
 {
     <p>
         <a asp-action="Create">Create New</a>
-    </p> 
-}
+    </p>
+ }
 
 <div class="container">
     <div class="row">
