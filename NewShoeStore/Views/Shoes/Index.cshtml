@@ -1,14 +1,17 @@
-﻿@model IEnumerable<NewShoeStore.Models.Shoe>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<NewShoeStore.Models.Shoe>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*<h1>מוצרים</h1>*@
+@if (Context.Session.GetString("UserName.Id") == "1")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p> 
+}
 
 <div class="container">
     <div class="row">
@@ -26,7 +29,7 @@
                             : @item.Price
                         </p>
                         @*<p class="card-text">@item.ProductDescription</p>*@
-                   @* <p class="card-text">@Html.DisplayNameFor(model => model.Price) : @item.Price</p>*@
+                        @* <p class="card-text">@Html.DisplayNameFor(model => model.Price) : @item.Price</p>*@
                         @*<p class="card-text">@item.Price</p>*@
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark">פרטים</a>
                     </div>
@@ -38,66 +41,66 @@
 </div>
 
 @*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Img)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Views)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Img)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Views)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>*@
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Img)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Views)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Size)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Img)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Views)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
 
-@section Css{ 
+@section Css{
     <link rel="stylesheet" href="~/css/SecondPage.css" />
 }

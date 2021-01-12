@@ -30,7 +30,25 @@ namespace NewShoeStore.Controllers
             //{
             //    return RedirectToAction("Create", "Customers");
             //}
-            return View(await _context.Customer.ToListAsync());
+
+            //                if (HttpContext.Session.GetString("user")== null) { 
+         //  if (HttpContext.Session.GetString("user.Id") == "1")
+
+                //            {
+                //                // if(Context.Session.GetString("UserName.Id") == "1")
+                //                return RedirectToAction("Create", "Customers");
+                //    }
+                //            else
+                //                return RedirectToAction(nameof(Index));
+                //}
+                //            else
+                //    return View(await _context.Order.ToListAsync());
+                //        }
+             return View(await _context.Customer.ToListAsync());
+          
+          // else
+               // return RedirectToAction("Index", "OrderShoes",);
+
         }
 
         // GET: Customers/Details/5
@@ -47,7 +65,7 @@ namespace NewShoeStore.Controllers
             {
                 return NotFound();
             }
-
+            else
             return View(customer);
         }
 
@@ -94,7 +112,7 @@ namespace NewShoeStore.Controllers
                           customer.Password == a.Password
                     select a;
 
-            if (q.Count() > 0)
+            if (q.Count() > 0 )
             {
                 HttpContext.Session.SetString("user", q.First().Id.ToString());
                 return RedirectToAction("Index", "OrderShoes");

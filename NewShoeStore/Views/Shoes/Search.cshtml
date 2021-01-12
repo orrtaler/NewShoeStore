@@ -1,14 +1,17 @@
-﻿@model IEnumerable<NewShoeStore.Models.Shoe>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<NewShoeStore.Models.Shoe>
 
 @{
     ViewData["Title"] = "Search";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>מוצרים</h1>
+@if (Context.Session.GetString("UserName.Id") == "1")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+ }
 
 <div class="container">
     <div class="row">
