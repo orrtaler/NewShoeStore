@@ -17,7 +17,15 @@ namespace NewShoeStore.Controllers
         {
             _logger = logger;
         }
-
+       // [HttpPost]
+       /* public async Task<IActionResult> Search(string name)
+        {
+            var s = from Shoe in _context.Shoe
+                    where Shoe.Category(name.ToLower())
+                    orderby Shoe.Category
+                    select Shoe;
+            return RedirectToAction(nameof(Index), await s.ToListAsync());
+        }*/
         public IActionResult Index()
         {
             return View();
