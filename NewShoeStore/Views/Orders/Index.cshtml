@@ -1,14 +1,17 @@
-﻿@model IEnumerable<NewShoeStore.Models.Order>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<NewShoeStore.Models.Order>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (Context.Session.GetString("UserName.Id") == "1")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p> 
+ }
 
 
 <table class="tableStyle">
@@ -22,19 +25,19 @@
         <td>כמות</td>
         <td>מידה</td>
         <td>פריטים</td>
-  @*@if (Model != null)
+        @*@if (Model != null)
+            {
+                @foreach (var item in Model)
                 {
-                    @foreach (var item in Model)
-                    {
-                            <tr>
-                                <td>@item.Shoes</td>
-                                <td>@item.Shoe.Color </td>
-                                <td>1</td>
-                                <td>@item.Shoe.Size </td>
-                                <td>@item.Shoe.Name </td>
-                            </tr>
-                        }
-                }*@
+                        <tr>
+                            <td>@item.Shoes</td>
+                            <td>@item.Shoe.Color </td>
+                            <td>1</td>
+                            <td>@item.Shoe.Size </td>
+                            <td>@item.Shoe.Name </td>
+                        </tr>
+                    }
+            }*@
     <tr class="endOfTable" colspan="4">
         <td>סכום ביניים</td>
         <td></td>
