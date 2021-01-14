@@ -115,7 +115,7 @@ namespace NewShoeStore.Controllers
             if (q.Count() > 0 )
             {
                 HttpContext.Session.SetString("user", q.First().Id.ToString());
-                return RedirectToAction("Index", "OrderShoes");
+                return RedirectToAction("Index", "Orders");
             }
             else
             {

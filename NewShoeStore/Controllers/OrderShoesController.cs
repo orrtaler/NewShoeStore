@@ -23,6 +23,10 @@ namespace NewShoeStore.Controllers
         // GET: OrderShoes
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("user") == null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
             var UserName = HttpContext.Session.GetString("user").ToString();
             var newShoeStoreContext = _context.OrderShoe.Where(o =>o.IdOrder.ToString()== UserName).Include(o => o.Shoe);
             return View(await newShoeStoreContext.ToListAsync());

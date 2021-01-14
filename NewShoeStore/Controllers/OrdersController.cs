@@ -59,6 +59,38 @@ namespace NewShoeStore.Controllers
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //IF רשמתי
+            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
+            //אחרת הוא יעביר אותו לעמוד רישום
+            //if (HttpContext.Session.GetString("user") == null)
+            //{
+            //    return RedirectToAction("Create", "Customers");
+            //}
+            //var order = await _context.Order.Include(x => x.Shoes).ThenInclude(x => x.Shoe).ToListAsync();
+
+            //string cart = HttpContext.Session.GetString("cart");
+            ////var products = new List<Shoe>();
+            //if (cart != null)
+            //{
+            //    string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            //    //products = _context.Shoe.Where(x => productIds.Contains(x.Id.ToString())).ToList();
+            //    Dictionary<string, int> dict = new Dictionary<string, int>();
+            //    foreach (var id in productIds)
+            //    {
+            //        if (dict.ContainsKey(id))
+            //            dict[id]++;
+            //        else
+            //            dict.Add(id, 1);
+            //    }
+            //    ViewData["quantityForOrder"] = dict;
+            //}
+           // return View(order);
+            //return View(await _context.Order.ToListAsync());
+
+
+
+
+
             if (id == null)
             {
                 return NotFound();
@@ -89,11 +121,28 @@ namespace NewShoeStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                order.CustomerId = int.Parse(HttpContext.Session.GetString("user"));
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+                string cart = HttpContext.Session.GetString("cart");
+                string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                foreach (var id in productIds)
+                {
+                    OrderShoe po = new OrderShoe();
+                    po.IdShose = int.Parse(id);
+                    po.IdOrder = order.Id;
+                    _context.Add(po);
+                    await _context.SaveChangesAsync();
+                }
+                
+                await _context.SaveChangesAsync();
+                HttpContext.Session.SetString("cart", "");
+                return RedirectToAction("Index", "Home");
             }
-            return View(order);
+            //return View(order);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Orders/Edit/5

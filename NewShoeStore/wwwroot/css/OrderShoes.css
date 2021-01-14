@@ -1,5 +1,5 @@
 ﻿th, td {
-    padding: 15px;
+    padding: 30%;
     border: 1px solid black;
     border-collapse: collapse;
     text-align: right;
@@ -49,4 +49,13 @@ td {
 .autoInput {
     margin: 3%;
     margin-bottom: 24%;
+}
+.setMyP {
+    margin-top: 10%;
+    margin-bottom: 16%;
+}
+.border {
+    border: 5px solid black;
+    text-align: center;
+    padding: 5px;
 }

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<NewShoeStore.Models.Shoe>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@*עמוד סל קניות*@
+<form class="setForm">
+    <dl class="row align-items-center d-flex justify-content-start">
+        <dt>
+            <table class="tableStyle">
+                <tr>
+                    <th colspan="5">ההזמנה שלך</th>
+
+                </tr>
+                <tr>
+                    <td>סה"כ לתשלום</td>
+                    <td>צבע</td>
+                    <td>כמות</td>
+                    <td>מידה</td>
+                    <td>פריטים</td>
+                </tr>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="price">@(item.Price * ViewBag.quantity[item.Id.ToString()])</td>
+                            <td>@item.Color </td>
+                            <td>@ViewBag.quantity[item.Id.ToString()]</td>
+                            <td>@item.Size </td>
+                            <td>@item.Name </td>
+                        </tr>
+                    }
+                }
+
+            </table>
+        </dt>
+
+        <dd>
+            <dl class="row setP">
+                <dt>
+                    <label for="interimAmount" class="frameForText">:סכום ביניים</label>
+                </dt>
+                <dd>
+                    <span id="total" class="border"></span>
+                    @*<input type="text" class="autoInput">*@
+                </dd>
+                <dd></dd>
+            </dl>
+            <dl class="row setP">
+                <dt>
+                    <div class="setMyP">
+                        <p>עלות משלוח- 30 שקלים</p>
+                        <p>בקניה מעל 300 שקלים משלוח חינם</p>
+                    </div>
+                </dt>
+                <dd></dd>
+            </dl>
+            <dl class="row setP">
+                <dt>
+                    <label for="interimAmount" class="frameForText">:סך הכל לתשלום</label>
+                </dt>
+                <dd>
+                    <span id="totalAndSent" class="border"></span>
+                    @*<input type="text" class="autoInput">*@
+                </dd>
+            </dl>
+    </dl>
+
+    <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">מעבר לתשלום</a>
+    @*<button type="submit" class="btn btn-secondary">מעבר לתשלום</button>*@
+    <a asp-action="Index" class="btn btn-secondary">חזרה לקניות</a>
+    @*<button type="submit" class="btn btn-secondary">חזרה לקניות</button>*@
+</form>
+@section Css{
+    <link rel="stylesheet" href="~/css/OrderShoes.css" />
+}
+@section Scripts{
+
+    <script>
+        $(function () {
+            var total = 0;
+            $(".price").each(function (index) {
+                total += parseInt($(this).text());
+            });
+            $('#total').text(total);
+
+            var totalForEnd = 0;
+            $("#totalAndSent").each(function (index) {
+                if (total > 300)
+                    totalForEnd = total;
+                else
+                    totalForEnd = total + 30;
+            });
+            $('#totalAndSent').text(totalForEnd);
+        });
+    </script>
+}
