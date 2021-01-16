@@ -23,50 +23,33 @@ namespace NewShoeStore.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            //IF רשמתי
-            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
-            //אחרת הוא יעביר אותו לעמוד רישום
-            //if(HttpContext.Session.GetString("user")==null)
-            //{
-            //    return RedirectToAction("Create", "Customers");
-            //}
-
-            //                if (HttpContext.Session.GetString("user")== null) { 
-         //  if (HttpContext.Session.GetString("user.Id") == "1")
-
-                //            {
-                //                // if(Context.Session.GetString("UserName.Id") == "1")
-                //                return RedirectToAction("Create", "Customers");
-                //    }
-                //            else
-                //                return RedirectToAction(nameof(Index));
-                //}
-                //            else
-                //    return View(await _context.Order.ToListAsync());
-                //        }
-             return View(await _context.Customer.ToListAsync());
-          
-          // else
-               // return RedirectToAction("Index", "OrderShoes",);
-
+            if (HttpContext.Session.GetString("user") == "4")
+                {
+                return View(await _context.Customer.ToListAsync());
+                }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
+                var customer = await _context.Customer
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+                else
+                    return View(customer);
             }
-            else
-            return View(customer);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Customers/Create
@@ -86,7 +69,11 @@ namespace NewShoeStore.Controllers
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                HttpContext.Session.SetString("user", customer.Id.ToString());
+                string id = HttpContext.Session.GetString("cart");
+                string afterId = id.Replace(",", "");
+                int newId = Int32.Parse(afterId);
+                return RedirectToAction("Details", "Shoes", new { id = newId });
             }
             else
             {
@@ -115,11 +102,14 @@ namespace NewShoeStore.Controllers
             if (q.Count() > 0 )
             {
                 HttpContext.Session.SetString("user", q.First().Id.ToString());
-                return RedirectToAction("Index", "Orders");
+                string id = HttpContext.Session.GetString("cart");
+                string afterId = id.Replace(",", "");
+                int newId = Int32.Parse(afterId);
+                return RedirectToAction("Details" , "Shoes" , new {id = newId });
             }
             else
             {
-                ViewData["Error"] = "User does not exist!";
+                ViewData["Error"] = "משתמש לא קיים במערכת!!!";
             }
             return RedirectToAction(nameof(Create),customer);
             //return View(customer);
@@ -129,17 +119,21 @@ namespace NewShoeStore.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
+                var customer = await _context.Customer.FindAsync(id);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+                return View(customer);
             }
-            return View(customer);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Customers/Edit/5
@@ -180,19 +174,23 @@ namespace NewShoeStore.Controllers
         // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+                var customer = await _context.Customer
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
 
-            return View(customer);
+                return View(customer);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Customers/Delete/5

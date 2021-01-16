@@ -1,4 +1,5 @@
-﻿@model NewShoeStore.Models.Customer
+﻿@using Microsoft.AspNetCore.Http;
+@model NewShoeStore.Models.Customer
 
 @{
     ViewData["Title"] = "Create";
@@ -28,30 +29,24 @@
                     <small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>
                 </div>
 
-                @*<div class="form-group">
-            <label for="exampleFormControlInput1">:מייל</label>
-            <input type="email" class="form-control is-valid" id="exampleFormControlInput1" placeholder="name@example.com">
-            <small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>
-        </div>*@
-
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
                     <input asp-for="Password" type="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="סיסמא">
                     <small asp-validation-for="Password" id="emailHelp" class="form-text text-muted text-danger">.הסיסמא שגויה</small>
                 </div>
-
-                @*<div class="form-group">
-            <label for="exampleInputPassword1">:סיסמא</label>
-            <input type="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="סיסמא">
-            <small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>
-        </div>*@
+                @if (Context.Session.GetString("user") == "4")
+                {
+                    <div>
+                        <a asp-action="Index" class="btn btn-primary">עבור לרשימת הלקוחות</a>
+                    </div>
+                }
                 <button type="submit" value="LogIn" class="btn btn-primary">אישור</button>
-                @*@if (ViewData["Error"] != null)
+                @if (ViewData["Error"] != null)
                 {
                     <div style="color:red; font-weight:bold">
                         @ViewData["Error"]
                     </div>
-                }*@
+                }
                 @if (ViewData["MissingInformation"] != null)
                 {
                     <div style="color:red; font-weight:bold">
@@ -100,7 +95,19 @@
                     <small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+                @if (Context.Session.GetString("user") == "4")
+                {
+                    <div>
+                        <a asp-action="Index" class="btn btn-primary">עבור לרשימת הלקוחות</a>
+                    </div>
+                }
                 <button type="submit" value="Create" class="btn btn-primary MyBtn">אישור</button>
+                @if (ViewData["MissingInformation"] != null)
+                {
+                    <div style="color:red; font-weight:bold">
+                        @ViewData["MissingInformation"]
+                    </div>
+                }
             </form>
         </div>
     </div>
@@ -158,13 +165,9 @@
         </div>
     </div>*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
 
 @section Css{
     <link rel="stylesheet" href="~/css/Customer.css" />

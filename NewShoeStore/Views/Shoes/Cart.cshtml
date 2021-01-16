@@ -9,13 +9,14 @@
         <dt>
             <table class="tableStyle">
                 <tr>
-                    <th colspan="5">ההזמנה שלך</th>
+                    <th colspan="6">ההזמנה שלך</th>
 
                 </tr>
                 <tr>
+                    <td></td>
                     <td>סה"כ לתשלום</td>
-                    <td>צבע</td>
                     <td>כמות</td>
+                    <td>צבע</td>
                     <td>מידה</td>
                     <td>פריטים</td>
                 </tr>
@@ -24,9 +25,12 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="price">@(item.Price * ViewBag.quantity[item.Id.ToString()])</td>
+                            <td>
+                                <a asp-controller="Shoes" asp-action="DeleteFromCart" asp-route-id="@item.Id">מחק</a>
+                            </td>
+                            <td class="price">@item.Price</td>
+                            <td>1</td>
                             <td>@item.Color </td>
-                            <td>@ViewBag.quantity[item.Id.ToString()]</td>
                             <td>@item.Size </td>
                             <td>@item.Name </td>
                         </tr>
@@ -39,7 +43,7 @@
         <dd>
             <dl class="row setP">
                 <dt>
-                    <label for="interimAmount" class="frameForText">:סכום ביניים</label>
+                    <label for="interimAmount" class="frameForText">סכום ביניים:</label>
                 </dt>
                 <dd>
                     <span id="total" class="border"></span>
@@ -49,28 +53,27 @@
             </dl>
             <dl class="row setP">
                 <dt>
-                    <div class="setMyP">
-                        <p>עלות משלוח- 30 שקלים</p>
-                        <p>בקניה מעל 300 שקלים משלוח חינם</p>
+                    <div class="myP">
+                        <p class="mP">עלות משלוח- 30 שקלים</p>
+                        <p>בקניה מעל 300 שקלים</p>
+                        <p>משלוח חינם</p>
                     </div>
                 </dt>
                 <dd></dd>
             </dl>
             <dl class="row setP">
                 <dt>
-                    <label for="interimAmount" class="frameForText">:סך הכל לתשלום</label>
+                    <label for="interimAmount" class="frameForText">סך הכל לתשלום:</label>
                 </dt>
                 <dd>
-                    <span id="totalAndSent" class="border"></span>
+                    <span id="totalAndSent"></span>
                     @*<input type="text" class="autoInput">*@
                 </dd>
             </dl>
     </dl>
 
     <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">מעבר לתשלום</a>
-    @*<button type="submit" class="btn btn-secondary">מעבר לתשלום</button>*@
     <a asp-action="Index" class="btn btn-secondary">חזרה לקניות</a>
-    @*<button type="submit" class="btn btn-secondary">חזרה לקניות</button>*@
 </form>
 @section Css{
     <link rel="stylesheet" href="~/css/OrderShoes.css" />

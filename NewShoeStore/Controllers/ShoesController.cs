@@ -21,69 +21,44 @@ namespace NewShoeStore.Controllers
         }
 
         // GET: Shoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name)
         {
-           
-            //if (HttpContext.Session.GetString("cart") == null)
-            //{
-            //    return View(await _context.Shoe.ToListAsync());
-            //}
-            //else
-            //{
-            //    string productId = HttpContext.Session.GetString("cart");
-            //    string[] ids = productId.Split(',');
-            //    int[] myInts = ids.Select(int.Parse).ToArray();
-            //    var purchased = from p in _context.Shoe
-            //                    where myInts.Any(s => s == p.Id)
-            //                    select p;
-            //    var leftItems = _context.Shoe.Except(purchased);
-            //    return View(await leftItems.ToListAsync());
-            //}
-            return View(await _context.Shoe.ToListAsync());
+            if(name == null)
+            {
+                return View(await _context.Shoe.ToListAsync());
+            }
+            var s = from Shoe in _context.Shoe
+                    where Shoe.Name.Contains(name)
+                    orderby Shoe.Name
+                    select Shoe;
+            return View(await s.ToListAsync());
         }
 
         // GET: Shoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var shoe = await _context.Shoe
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (shoe == null)
-            {
-                return NotFound();
-            }
-            return View(shoe);
-            //קוד מאפרת
-            //if (HttpContext.Session.GetString("cart") == null)
-            //{
-            //    return View(shoe);
-            //    //return View(await _context.Shoe.ToListAsync());
-            //}
-            //else
-            //{
-            //    string productId = HttpContext.Session.GetString("cart");
-            //    string[] ids = productId.Split(',');
-            //    int[] myInts = ids.Select(int.Parse).ToArray();
-            //    var purchased = from p in _context.Shoe
-            //                    where myInts.Any(s => s == p.Id)
-            //                    select p;
-            //    var leftItems = _context.Shoe.Except(purchased);
-            //    return View(shoe);
-            //    //return View(await _context.Shoe.ToListAsync());
-            //    //return View(await leftItems.ToListAsync());
-            //}
-
-
+                var shoe = await _context.Shoe
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (shoe == null)
+                {
+                    return NotFound();
+                }
+                return View(shoe);
         }
 
         // GET: Shoes/Create
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("user") == "4")
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Shoes/Create
@@ -107,87 +82,83 @@ namespace NewShoeStore.Controllers
         public async Task<IActionResult> Search(string name)
         {
             var s = from Shoe in _context.Shoe
+                    where Shoe.Category == ""
+                    select Shoe;
+            if (name == "בנים" || name == "בנות")
+            {
+                s = from Shoe in _context.Shoe
+                    where Shoe.Category.Contains(name) && !(Shoe.Category.Contains("בייבי"))
+                    orderby Shoe.Category
+                    select Shoe;
+            }
+            else
+            {
+                s = from Shoe in _context.Shoe
                     where Shoe.Category.Contains(name)
                     orderby Shoe.Category
                     select Shoe;
+            }
             return View(await s.ToListAsync());
         }
-        [HttpPost]
-        public async Task<IActionResult> SearchAsync(string name)
-        {
-            var s = from Shoe in _context.Shoe
-                    where Shoe.Name.Contains(name)
-                    orderby Shoe.Name
-                    select Shoe;
-            //return RedirectToAction(nameof(Index), s.ToListAsync());
-            return RedirectToAction("Index", "Shoes", s.ToListAsync());
-        }
 
-        //מאפרת
         public IActionResult AddToCart(int Id)
         {
-            if (HttpContext.Session.GetString("user") == null)
-                    {
-                        return RedirectToAction("Create", "Customers");
-                    }
             string cart = HttpContext.Session.GetString("cart");
-            if (cart == "")
+            if (cart != null && cart.Any(c => cart.Contains(Id.ToString())))
+            {
+                        return RedirectToAction("Details", "Shoes", new { id = Id });
+            }
+            if (cart == null)
                 cart = "";
-            cart += "," + Id;
-            HttpContext.Session.SetString("cart", cart);
-            return RedirectToAction("Index", "Shoes");
-           
+           cart += "," + Id;
+           HttpContext.Session.SetString("cart", cart);
+            if (HttpContext.Session.GetString("user") == null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
+            return RedirectToAction("Details", "Shoes", new { id = Id });
         }
 
-        //public IActionResult ToGo(int id, [Bind("Id,Name,Color,Price,ProductDescription,Img,Views,Size,Category")] Shoe shoe)
-        //{
-        //    if(HttpContext.Session.GetString("user")==null)
-        //    {
-        //        return RedirectToAction("Create", "Customers");
-        //    }
-        //    //TempData["ShoeId"] = id;
-
-        //    return RedirectToAction("SetForOrder", "OrderShoes", shoe);
-        //}
+        public IActionResult DeleteFromCart(int id)
+        {
+            string c =HttpContext.Session.GetString("cart");
+            string i = "," + id;
+            string after = c.Replace(i, "");
+            HttpContext.Session.SetString("cart", after);
+            return RedirectToAction("Cart", "Shoes");
+        }
 
         public async Task<IActionResult> Cart()
         {
             string cart = HttpContext.Session.GetString("cart");
             var products = new List<Shoe>();
-
-            if(cart != null)
+            if (cart != null && cart !="")
             {
-
-            string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
-            products = _context.Shoe.Where(x => productIds.Contains(x.Id.ToString())).ToList();
-
-            Dictionary<string, int> dict = new Dictionary<string, int>();
-            foreach (var id in productIds)
-            {
-                if (dict.ContainsKey(id))
-                    dict[id]++;
-                else
-                    dict.Add(id, 1);
+                string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                products = _context.Shoe.Where(x => productIds.Contains(x.Id.ToString())).ToList();
+                return View(products);
             }
-            ViewData["quantity"] = dict;
-            }
-            return View(products);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Shoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var shoe = await _context.Shoe.FindAsync(id);
-            if (shoe == null)
-            {
-                return NotFound();
+                var shoe = await _context.Shoe.FindAsync(id);
+                if (shoe == null)
+                {
+                    return NotFound();
+                }
+                return View(shoe);
             }
-            return View(shoe);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Shoes/Edit/5
@@ -228,19 +199,21 @@ namespace NewShoeStore.Controllers
         // GET: Shoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var shoe = await _context.Shoe
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (shoe == null)
+                {
+                    return NotFound();
+                }
+                return View(shoe);
             }
-
-            var shoe = await _context.Shoe
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (shoe == null)
-            {
-                return NotFound();
-            }
-
-            return View(shoe);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Shoes/Delete/5

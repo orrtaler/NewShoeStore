@@ -1,5 +1,6 @@
-﻿th, td {
-    padding: 30%;
+﻿
+th, td {
+    padding: 15px;
     border: 1px solid black;
     border-collapse: collapse;
     text-align: right;
@@ -50,12 +51,19 @@ td {
     margin: 3%;
     margin-bottom: 24%;
 }
-.setMyP {
-    margin-top: 10%;
-    margin-bottom: 16%;
+.setR {
+    margin-left: 41%;
+    margin-top: 2%;
 }
-.border {
-    border: 5px solid black;
-    text-align: center;
-    padding: 5px;
+.myLabel {
+    margin-left: 41%;
+    direction: rtl;
+}
+.myP {
+    padding-bottom: 10%;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+.mP {
+    padding-left: 19%;
 }
