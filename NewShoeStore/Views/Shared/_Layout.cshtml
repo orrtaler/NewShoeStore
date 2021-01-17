@@ -130,11 +130,11 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown inTheSameLine">
-                        <a class="nav-link " role="button" data-toggle="" asp-area="" asp-controller="Home"  asp-action="Index"
-                           aria-haspopup="true" aria-expanded="false" >
+                        <a class="nav-link " role="button" data-toggle="" asp-area="" asp-controller="Home" asp-action="Index"
+                           aria-haspopup="true" aria-expanded="false">
                             חזרה לעמוד ראשי
                         </a>
-                      
+
                     </li>
 
 
@@ -157,7 +157,8 @@
             <form class="form-inline my-lg-0">
                 <div class="collapse navbar-collapse navbar-nav mr-auto abc" id="navbarSupportedContent">
                     <!--<ul class="navbar-nav mr-auto">-->
-                    <div class="col-sm-3 stayRight">
+        
+                           <div class="col-sm-3 stayRight">
                         <a class="nav-link " asp-area="" asp-controller="Home" asp-action="TermsofUse">תנאי שימוש</a>
                         <!-- צריך להוסיף את הקישור המתאים שמפנה-->
                     </div>
@@ -178,6 +179,15 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    @section Scripts{
+        <script>
+            //function pop(event) {
+            //    e.preventDefault();
+            //    document.getElementById("popup")
+            // }
+     
+        </script>
+    }
 </body>
 </html>
 
