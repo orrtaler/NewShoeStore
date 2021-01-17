@@ -55,7 +55,10 @@ namespace NewShoeStore.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("cart") != null && HttpContext.Session.GetString("cart") != "")
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         // POST: Customers/Create

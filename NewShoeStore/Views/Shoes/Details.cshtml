@@ -48,8 +48,8 @@
                     </dd>
                 </dl>
             </div>
-                <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR" onclick="forCart();">הוסף לסל </a>
-            <a asp-action="Cart" class="btn btn-secondary btn-lg btn-block stayR">תשלום </a>
+            <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR" onclick="forCart();">הוסף לסל </a>
+            <a asp-action="Cart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR" onclick="alert('יש לבצע הוספה לסל קודם פעולה זו');">תשלום </a>
             <a asp-action="Index" class="btn btn-secondary btn-lg btn-block stayR">חזרה לרשימת המוצרים</a>
         </dd>
     </dl>
@@ -113,12 +113,18 @@
 @section Css{
     <link rel="stylesheet" href="~/css/productPage.css" />
 }
+@*@section Scripts{
+        <script>
+            function forCart() {
+                if (Context.Session.GetString("user") != null) {
+                    alert('!!!!!!!!!!!!!');
+                }
+            }
+        </script>
+    }*@
+
 @section Scripts{
     <script>
-        function forCart() {
-            if (Context.Session.GetString("user") != null) {
-                alert('!!!!!!!!!!!!!');
-            }
-        }
+
     </script>
 }

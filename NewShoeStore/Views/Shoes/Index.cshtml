@@ -9,39 +9,42 @@
 {
     <p>
         <a asp-action="Create" class="btn btn-primary">צור נעל חדש</a>
-    </p> 
+    </p>
 }
 
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card">
-                    <img src="@item.Img" class="card-img-top productImg" />
-                    <div class="card-body">
-                        @*<p class="card-title"> @Html.DisplayNameFor(model => model.Name)</p>*@
-                        <p class="card-title">@item.Name</p>
-                        <p class="card-text">
-                            @item.ProductDescription
-                            @Html.DisplayNameFor(model => model.Price)
-                            : @item.Price
-                        </p>
-                        @*<p class="card-text">@item.ProductDescription</p>*@
-                        @* <p class="card-text">@Html.DisplayNameFor(model => model.Price) : @item.Price</p>*@
-                        @*<p class="card-text">@item.Price</p>*@
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark">פרטים</a>
-                        @if (Context.Session.GetString("user") == "4")
-                        {
-                            <div>
-                                <a asp-action="Edit" asp-route-id="@item.Id">ערוך</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
-                            </div>
-                        }
+            @if (item.Views > 5)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img src="@item.Img" class="card-img-top productImg" />
+                        <div class="card-body">
+                            <p class="card-title sb">@item.Name</p>
+                            <p class="card-text">
+                                @item.ProductDescription<br />
+                                @Html.DisplayNameFor(model => model.Price)
+                                : @item.Price
+                            </p>
+                            @*<p class="card-text">@item.ProductDescription
+                                <p>@Html.DisplayNameFor(model => model.Price): @item.Price</p>
+                                </p>*@
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark sb">פרטים</a>
+                            @if (Context.Session.GetString("user") == "4")
+                            {
+                                <div>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">ערוך</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
         }
 
     </div>

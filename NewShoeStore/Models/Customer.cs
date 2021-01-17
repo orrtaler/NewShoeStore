@@ -14,28 +14,28 @@ namespace NewShoeStore.Models
         [StringLength(100)]
         [Display(Name = "שם פרטי ומשפחה")]
         public string FullName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "יש להכניס עיר")]
         [StringLength(50)]
         [Display(Name = "עיר")]
         public string City { get; set; }
-        [Required]
+        [Required(ErrorMessage = "יש להכניס ארץ")]
         [StringLength(50)]
         [Display(Name = "ארץ")]
         public string Country { get; set; }
-        [Required]
+        [Required(ErrorMessage = "יש להכניס רחוב")]
         [StringLength(100)]
         [Display(Name = "רחוב")]
         public string Street { get; set; }
         [Range(0, 2000)]
         [Display(Name = "מספר בית")]
         public int HouseNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "כתובת המייל אינה חוקית")]
         [StringLength(50)]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "כתובת המייל אינה חוקית")]
         //[RegularExpression(@"^[A-Z,a-z,0-9]+@([a-z,A-Z]+\\.)+[a-z,A-Z]{2,6}]&")]
         [Display(Name = "דואר אלקטרוני")]
         public string Mail { get; set; }
-        [Required]
+        [Required(ErrorMessage = "יש להכניס סיסמא")]
         [StringLength(8)]
         [Display(Name = "סיסמא")]
         public string Password { get; set; }

@@ -48,7 +48,11 @@ namespace NewShoeStore.Controllers
                 {
                     return NotFound();
                 }
-                return View(shoe);
+            shoe.Views++;
+            _context.Update(shoe);
+            await _context.SaveChangesAsync();
+
+            return View(shoe);
         }
 
         // GET: Shoes/Create
@@ -112,7 +116,7 @@ namespace NewShoeStore.Controllers
                 cart = "";
            cart += "," + Id;
            HttpContext.Session.SetString("cart", cart);
-            if (HttpContext.Session.GetString("user") == null)
+            if (HttpContext.Session.GetString("user") == null || HttpContext.Session.GetString("user") == "")
             {
                 return RedirectToAction("Create", "Customers");
             }
@@ -128,7 +132,7 @@ namespace NewShoeStore.Controllers
             return RedirectToAction("Cart", "Shoes");
         }
 
-        public async Task<IActionResult> Cart()
+        public async Task<IActionResult> Cart(int Id)
         {
             string cart = HttpContext.Session.GetString("cart");
             var products = new List<Shoe>();
@@ -138,7 +142,8 @@ namespace NewShoeStore.Controllers
                 products = _context.Shoe.Where(x => productIds.Contains(x.Id.ToString())).ToList();
                 return View(products);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Shoes", new { id = Id });
+            //return RedirectToAction("Index", "Home");
         }
 
         // GET: Shoes/Edit/5

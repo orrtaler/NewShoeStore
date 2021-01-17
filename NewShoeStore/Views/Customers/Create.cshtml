@@ -22,7 +22,7 @@
     class="under" -->
     <div class="tab-content under">
         <div id="login" class="container tab-pane active">
-            <form asp-action="LogIn">
+            <form asp-action="LogIn" onsubmit="foo2(event);">
                 <div class="form-group">
                     <label asp-for="Mail" class="control-label"></label>
                     <input asp-for="Mail" class="form-control is-valid" id="exampleFormControlInput1" placeholder="name@example.com">
@@ -31,8 +31,8 @@
 
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" type="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="סיסמא">
-                    <small asp-validation-for="Password" id="emailHelp" class="form-text text-muted text-danger">.הסיסמא שגויה</small>
+                    <input asp-for="Password" type="password" class="form-control is-valid" id="exampleInputPassword1" placeholder="סיסמא">
+                    @*<small asp-validation-for="Password" id="emailHelp" class="form-text text-muted text-danger">.הסיסמא שגויה</small>*@
                 </div>
                 @if (Context.Session.GetString("user") == "4")
                 {
@@ -40,6 +40,7 @@
                         <a asp-action="Index" class="btn btn-primary">עבור לרשימת הלקוחות</a>
                     </div>
                 }
+                @*<a asp-action="LogIn" class="btn btn-primary">thaur2</a>*@
                 <button type="submit" value="LogIn" class="btn btn-primary">אישור</button>
                 @if (ViewData["Error"] != null)
                 {
@@ -47,12 +48,12 @@
                         @ViewData["Error"]
                     </div>
                 }
-                @if (ViewData["MissingInformation"] != null)
+                @*@if (ViewData["MissingInformation"] != null)
                 {
                     <div style="color:red; font-weight:bold">
                         @ViewData["MissingInformation"]
                     </div>
-                }
+                }*@
             </form>
         </div>
 
@@ -82,16 +83,17 @@
                 <div class="form-group">
                     <label asp-for="HouseNumber" class="control-label"></label>
                     <input asp-for="HouseNumber" class="form-control is-valid" id="InputHouseNumbert" placeholder="מספר בית" />
-                    <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                    @*<span asp-validation-for="HouseNumber" class="text-danger"></span>*@
                 </div>
                 <div class="form-group">
                     <label asp-for="Mail" class="control-label"></label>
                     <input asp-for="Mail" class="form-control is-valid" id="exampleFormControlInput1" placeholder="name@example.com">
-                    <small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                    @*<small id="emailHelp" class="form-text text-muted">לעולם לא נשתף את הדוא"ל שלך עם אף אחד אחר.</small>*@
                 </div>
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" type="password" class="form-control is-invalid" id="exampleInputPassword2" placeholder="סיסמא">
+                    <input asp-for="Password" type="password" class="form-control is-valid" id="exampleInputPassword2" placeholder="סיסמא">
                     @*<small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>*@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
@@ -177,15 +179,23 @@
     <script>
         function foo(e) {
             var isValid = true;
-
-
             if (document.getElementById("InputName").value.length < 2 || document.getElementById("InputName").value.length > 30 || document.getElementById("InputCountry").value.length < 2 || document.getElementById("InputCountry").value.length > 20 || document.getElementById("InputCity").value.length < 2 ||
                 document.getElementById("InputCity").value.length > 20 || document.getElementById("InputStreet").value.length < 2 || document.getElementById("InputStreet").value.length > 20 ||
                 document.getElementById("exampleInputPassword2").value == " ") {
                 alert('אחד או יותר מהנתונים שהזנת שגוי');
             }
             else
-                e.preventDefault();
+                isValid = false;
+                //e.preventDefault();
+        }
+        function foo2(e) {
+            var isValid = true;
+            if (document.getElementById("exampleFormControlInput1").value.length == "" || document.getElementById("exampleInputPassword1").value.length == "") {
+                alert('חסרים נתונים');
+            }
+            else
+                //e.preventDefault();
+                isValid = false;
         }
     </script>
 }

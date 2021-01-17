@@ -5,8 +5,15 @@
 
 .card-text {
     height: 50px;
+    text-align: center;
 }
 
 .card {
     margin-bottom: 15%;
+}
+.btn {
+    text-align: center;
+}
+.sb {
+    text-align: center;
 }
