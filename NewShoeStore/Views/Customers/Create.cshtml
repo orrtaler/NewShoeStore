@@ -57,7 +57,7 @@
         </div>
 
         @* רישום לחדש *@
-        <div id="regis" class="container tab-pane fade">
+        <div id="regis" class="container tab-pane fade" onsubmit="foo(event);">
             <form asp-action="Create">
                 <div class="form-group">
                     <label asp-for="FullName" class="control-label"></label>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
                     <input asp-for="Password" type="password" class="form-control is-invalid" id="exampleInputPassword2" placeholder="סיסמא">
-                    <small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>
+                    @*<small id="emailHelp" class="form-text text-muted">.הסיסמא שגויה</small>*@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 @if (Context.Session.GetString("user") == "4")
@@ -173,3 +173,19 @@
     <link rel="stylesheet" href="~/css/Customer.css" />
 }
 
+@section Scripts{
+    <script>
+        function foo(e) {
+            var isValid = true;
+
+
+            if (document.getElementById("InputName").value.length < 2 || document.getElementById("InputName").value.length > 30 || document.getElementById("InputCountry").value.length < 2 || document.getElementById("InputCountry").value.length > 20 || document.getElementById("InputCity").value.length < 2 ||
+                document.getElementById("InputCity").value.length > 20 || document.getElementById("InputStreet").value.length < 2 || document.getElementById("InputStreet").value.length > 20 ||
+                document.getElementById("exampleInputPassword2").value == " ") {
+                alert('אחד או יותר מהנתונים שהזנת שגוי');
+            }
+            else
+                e.preventDefault();
+        }
+    </script>
+}

@@ -11,7 +11,7 @@
             <img src="@Html.DisplayFor(model => model.Img)" alt="baby boot" class="rounded-sm">
         </dt>
         <dd>
-            <div class="col abc ">
+            <div class="col abc">
                 <h1 class="font-weight-bold f">@Html.DisplayFor(model => model.Name)</h1>
                 <p class="font-weight-bolder"> @Html.DisplayFor(model => model.ProductDescription)</p>
                 @if (Context.Session.GetString("user") == "4")
@@ -31,8 +31,8 @@
                     <dt>
                         <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Color):</span>
                         @*<span class="frameForText">
-                  <label for="color">צבע</label>
-                </span>*@
+                              <label for="color">צבע</label>
+                            </span>*@
                     </dt>
                     <dd>
                         <label for="color" class="frameForText">@Html.DisplayFor(model => model.Color)</label>
@@ -48,7 +48,7 @@
                     </dd>
                 </dl>
             </div>
-            <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </a>
+                <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR" onclick="forCart();">הוסף לסל </a>
             <a asp-action="Cart" class="btn btn-secondary btn-lg btn-block stayR">תשלום </a>
             <a asp-action="Index" class="btn btn-secondary btn-lg btn-block stayR">חזרה לרשימת המוצרים</a>
         </dd>
@@ -112,4 +112,13 @@
 
 @section Css{
     <link rel="stylesheet" href="~/css/productPage.css" />
+}
+@section Scripts{
+    <script>
+        function forCart() {
+            if (Context.Session.GetString("user") != null) {
+                alert('!!!!!!!!!!!!!');
+            }
+        }
+    </script>
 }
