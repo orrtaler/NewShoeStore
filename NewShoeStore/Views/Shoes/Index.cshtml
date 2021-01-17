@@ -5,11 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h1>מוצרים</h1>*@
-@if (Context.Session.GetString("UserName.Id") == "1")
+@if (Context.Session.GetString("user") == "4")
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create" class="btn btn-primary">צור נעל חדש</a>
     </p> 
 }
 
@@ -32,6 +31,14 @@
                         @* <p class="card-text">@Html.DisplayNameFor(model => model.Price) : @item.Price</p>*@
                         @*<p class="card-text">@item.Price</p>*@
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark">פרטים</a>
+                        @if (Context.Session.GetString("user") == "4")
+                        {
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@item.Id">ערוך</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

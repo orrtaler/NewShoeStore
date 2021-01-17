@@ -1,70 +1,59 @@
-﻿@model NewShoeStore.Models.Shoe
+﻿@using Microsoft.AspNetCore.Http;
+@model NewShoeStore.Models.Shoe
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<!--<div class="col abc ">
-    <h1 class="font-weight-bold f">@Html.DisplayFor(model => model.Name)</h1>
-    <p class="font-weight-bolder">@Html.DisplayFor(model => model.ProductDescription) </p>
-    <p class="font-weight-normal">@Html.DisplayNameFor(model => model.Color):</p>
-    <label for="color" class="frameForText">@Html.DisplayFor(model => model.Color)</label>-->
-    @*<p class="font-weight-normal">@Html.DisplayFor(model => model.Color)</p>*@
-    <!--<p class="font-weight-normal">@Html.DisplayNameFor(model => model.Size):</p>
-    <label for="size" class="frameForText">@Html.DisplayFor(model => model.Size)</label>-->
-    @*<p class="font-weight-normal">@Html.DisplayFor(model => model.Size)</p>*@
-    <!--<p class="font-weight-normal">@Html.DisplayNameFor(model => model.Price):</p>
-    <label for="price" class="frameForText">@Html.DisplayFor(model => model.Price)</label>-->
-    @*<p class="font-weight-normal">@Html.DisplayFor(model => model.Price)</p>*@
-    <!--<button type="button" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </button>
-    <a asp-action="Index">חזרה לרשימת המוצרים</a>
-</div>-->
-
 <div class="setText">
-        <dl class="row align-items-center d-flex justify-content-start">
-            <dt>
-                <img src="@Html.DisplayFor(model => model.Img)" alt="baby boot" class="rounded-sm">
-            </dt>
-            <dd>
-                <div class="col abc ">
-                    <h1 class="font-weight-bold f">@Html.DisplayFor(model => model.Name)</h1>
-                    <p class="font-weight-bolder"> @Html.DisplayFor(model => model.ProductDescription)</p>
-                    <dl class="row">
-                        <dt>
-                            <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Size):</span>
-                        </dt>
-                        <dd>
-                            <label for="size" class="frameForText">@Html.DisplayFor(model => model.Size)</label>
-                        </dd>
-                    </dl>
+    <dl class="row align-items-center d-flex justify-content-start">
+        <dt>
+            <img src="@Html.DisplayFor(model => model.Img)" alt="baby boot" class="rounded-sm">
+        </dt>
+        <dd>
+            <div class="col abc ">
+                <h1 class="font-weight-bold f">@Html.DisplayFor(model => model.Name)</h1>
+                <p class="font-weight-bolder"> @Html.DisplayFor(model => model.ProductDescription)</p>
+                @if (Context.Session.GetString("user") == "4")
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary ma">ערוך</a>
+                }
+                <dl class="row">
+                    <dt>
+                        <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Size):</span>
+                    </dt>
+                    <dd>
+                        <label for="size" class="frameForText">@Html.DisplayFor(model => model.Size)</label>
+                    </dd>
+                </dl>
 
-                    <dl class="row">
-                        <dt>
-                            <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Color):</span>
-                            @*<span class="frameForText">
-                      <label for="color">צבע</label>
-                    </span>*@
-                        </dt>
-                        <dd>
-                            <label for="color" class="frameForText">@Html.DisplayFor(model => model.Color)</label>
-                        </dd>
-                    </dl>
+                <dl class="row">
+                    <dt>
+                        <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Color):</span>
+                        @*<span class="frameForText">
+                  <label for="color">צבע</label>
+                </span>*@
+                    </dt>
+                    <dd>
+                        <label for="color" class="frameForText">@Html.DisplayFor(model => model.Color)</label>
+                    </dd>
+                </dl>
 
-                    <dl class="row">
-                        <dt>
-                            <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Price):</span>
-                        </dt>
-                        <dd>
-                            <label for="price" class="frameForText">@Html.DisplayFor(model => model.Price)</label>
-                        </dd>
-                    </dl>
-                </div>
-                <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </a>
-                <a asp-action="Cart" class="btn btn-secondary btn-lg btn-block stayR">תשלום </a>
-                <a asp-action="Index" class="btn btn-secondary btn-lg btn-block stayR">חזרה לרשימת המוצרים</a>
-            </dd>
-        </dl>
-    </div>
+                <dl class="row">
+                    <dt>
+                        <span class="font-weight-normal">@Html.DisplayNameFor(model => model.Price):</span>
+                    </dt>
+                    <dd>
+                        <label for="price" class="frameForText">@Html.DisplayFor(model => model.Price)</label>
+                    </dd>
+                </dl>
+            </div>
+            <a asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg btn-block stayR">הוסף לסל </a>
+            <a asp-action="Cart" class="btn btn-secondary btn-lg btn-block stayR">תשלום </a>
+            <a asp-action="Index" class="btn btn-secondary btn-lg btn-block stayR">חזרה לרשימת המוצרים</a>
+        </dd>
+    </dl>
+</div>
 
 @*<h1>Details</h1>
 

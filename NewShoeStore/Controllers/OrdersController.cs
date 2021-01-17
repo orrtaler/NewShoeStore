@@ -23,87 +23,31 @@ namespace NewShoeStore.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            //IF רשמתי
-            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
-            //אחרת הוא יעביר אותו לעמוד רישום
             if (HttpContext.Session.GetString("user") == null)
             {
-                return RedirectToAction("Create", "Customers");
+                return RedirectToAction("Index", "Home");
             }
             return View(await _context.Order.ToListAsync());
         }
-
-
-
-
-//                if (HttpContext.Session.GetString("user")== null) { 
-//                if (HttpContext.Session.GetString("user.Id") == "1")
-//            {
-//                // if(Context.Session.GetString("UserName.Id") == "1")
-//                return RedirectToAction("Create", "Customers");
-//    }
-//            else
-//                return RedirectToAction(nameof(Index));
-//}
-//            else
-//    return View(await _context.Order.ToListAsync());
-//        }
-
-
-
-
-
-
-
-
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            //IF רשמתי
-            //כי זה מגדיר שניתן לגשת רק אם המשתמש רשום
-            //אחרת הוא יעביר אותו לעמוד רישום
-            //if (HttpContext.Session.GetString("user") == null)
-            //{
-            //    return RedirectToAction("Create", "Customers");
-            //}
-            //var order = await _context.Order.Include(x => x.Shoes).ThenInclude(x => x.Shoe).ToListAsync();
-
-            //string cart = HttpContext.Session.GetString("cart");
-            ////var products = new List<Shoe>();
-            //if (cart != null)
-            //{
-            //    string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
-            //    //products = _context.Shoe.Where(x => productIds.Contains(x.Id.ToString())).ToList();
-            //    Dictionary<string, int> dict = new Dictionary<string, int>();
-            //    foreach (var id in productIds)
-            //    {
-            //        if (dict.ContainsKey(id))
-            //            dict[id]++;
-            //        else
-            //            dict.Add(id, 1);
-            //    }
-            //    ViewData["quantityForOrder"] = dict;
-            //}
-           // return View(order);
-            //return View(await _context.Order.ToListAsync());
-
-
-
-
-
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var order = await _context.Order
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
 
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
+                return View(order);
             }
-
-            return View(order);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Orders/Create
@@ -148,17 +92,21 @@ namespace NewShoeStore.Controllers
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var order = await _context.Order.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
+                var order = await _context.Order.FindAsync(id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
+                return View(order);
             }
-            return View(order);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Orders/Edit/5
@@ -199,19 +147,23 @@ namespace NewShoeStore.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("user") == "4")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+                var order = await _context.Order
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
 
-            return View(order);
+                return View(order);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Orders/Delete/5
